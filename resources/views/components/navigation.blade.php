@@ -8,8 +8,8 @@
       <!-- Menú escritorio -->
       <div class="hidden md:flex items-center space-x-4">
         <a href="/usuarios" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100">Crear Usuario</a>
-        <a href="#" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100">Crear Ticket</a>
-        <a href="#" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100">Gestionar Tickets</a>
+        <a href="/ticket/create" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100">Crear Ticket</a>
+        <a href="/tickets" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100">Gestionar Tickets</a>
       </div>
 
       <!-- Botón menú móvil -->
@@ -30,8 +30,8 @@
   <div id="mobile-menu" class="hidden md:hidden bg-white pb-3 pt-1 border-t border-gray-200">
     <div class="px-2 space-y-1">
       <a href="/usuarios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100">Crear Usuario</a>
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100">Crear Ticket</a>
-      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100">Gestionar Tickets</a>
+      <a href="/ticket/create" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100">Crear Ticket</a>
+      <a href="/tickets" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-100">Gestionar Tickets</a>
     </div>
   </div>
 </nav>
