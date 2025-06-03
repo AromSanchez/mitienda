@@ -32,23 +32,11 @@ class ProductoController extends Controller
             'picture' => 'nullable|image|max:2048', // max 2MB
         ]);
 
-        $rutaImagen = null;
-
         if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-
-            // Mover el archivo a public/productos
-            $file->move(public_path('productos'), $fileName);
-
-            $rutaImagen = 'productos/' . $fileName;
+            $validated['picture'] = $request->file('picture')->store('productos', 'public');
         }
 
-        $producto = Producto::create([
-            'name' => $validated['name'],
-            'price' => $validated['price'],
-            'picture' => $rutaImagen,
-        ]);
+        $producto = Producto::create($validated);
 
         return redirect('/');
     }
@@ -64,9 +52,10 @@ class ProductoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Producto $producto)
+    public function edit($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return view('edit', compact('producto'));
     }
 
     /**
@@ -77,21 +66,14 @@ class ProductoController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'picture' => 'nullable|image|max:2048',
+            'picture' => 'nullable|image|max:2048', // max 2MB
         ]);
-    
-        // Si hay una nueva imagen, la guardamos y actualizamos la ruta
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('productos'), $fileName);
-            $producto->picture = 'productos/' . $fileName;
-        }
-    
-        // Actualizamos los demás campos
-        $producto->name = $validated['name'];
-        $producto->price = $validated['price'];
-        $producto->save();
+
+        
+
+        $producto = Producto::create($validated);
+
+        return redirect('/');
     }
 
     /**

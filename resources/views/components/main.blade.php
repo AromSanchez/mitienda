@@ -29,7 +29,7 @@
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td class="px-6 py-4">
                         @if ($producto->picture)
-                        <img src="{{ asset($producto->picture) }}" alt="Imagen" class="w-20 h-20 object-cover rounded">
+                        <img src="{{ asset('storage/' . $producto->picture) }}" alt="Imagen" class="w-20 h-20 object-cover rounded">
                         @else
                         <span class="text-gray-400">Sin imagen</span>
                         @endif

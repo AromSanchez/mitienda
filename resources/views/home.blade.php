@@ -23,6 +23,5 @@
         @include('components.navigation')
         @include('components.main')
         @include('components.create')
-        @include('components.edit')
     </body>
 </html>
