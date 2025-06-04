@@ -11,8 +11,8 @@ class Usuario extends Model
         'email',
     ];
 
-    // public function tickets()
-    // {
-    //     return $this->hasMany(Ticket::class);
-    // }
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'usuario_id'); // usa la clave foránea correcta si es 'usuario_id'
+    }
 }

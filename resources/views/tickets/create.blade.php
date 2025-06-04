@@ -5,12 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Crear Nuevo Ticket</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @endif
 </head>
 
 <body class="bg-gray-50">
 
-@include('components.navigation')
+  @include('components.navigation')
 
   <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 mt-5">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Crear Nuevo Ticket</h2>
@@ -25,8 +27,7 @@
           name="title"
           placeholder="Resumen breve del problema"
           class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          required
-        />
+          required />
         <!-- Error example -->
         <!-- <p class="mt-1 text-sm text-red-600">El título es requerido</p> -->
       </div>
@@ -40,8 +41,7 @@
           rows="5"
           placeholder="Describa detalladamente el problema o consulta"
           class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          required
-        ></textarea>
+          required></textarea>
         <!-- Error example -->
         <!-- <p class="mt-1 text-sm text-red-600">La descripción es requerida</p> -->
       </div>
@@ -54,15 +54,14 @@
             id="user"
             name="usuario_id"
             class="bg-white w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 cursor-pointer focus:ring-blue-500 focus:border-blue-500"
-            required
-          >
+            required>
             <option value="" disabled selected>Seleccionar usuario</option>
             <!-- Aquí deberás agregar los usuarios desde backend o JavaScript -->
             @foreach ($usuarios as $usuario)
-              <option value="{{ $usuario->id }}">
-                {{ $usuario->name }} 
-                ({{ $usuario->email }})
-              </option>
+            <option value="{{ $usuario->id }}">
+              {{ $usuario->name }}
+              ({{ $usuario->email }})
+            </option>
             @endforeach
           </select>
           <!-- Error example -->
@@ -100,8 +99,7 @@
             type="button"
             id="remove-file"
             class="ml-2 flex-shrink-0 p-1 rounded-full text-gray-500 hover:text-gray-700 focus:outline-none"
-            aria-label="Eliminar archivo"
-          >
+            aria-label="Eliminar archivo">
             <!-- Icono X SVG -->
             <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -116,8 +114,7 @@
       <div class="">
         <button
           type="submit"
-          class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-        >
+          class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
           Enviar Ticket
         </button>
       </div>

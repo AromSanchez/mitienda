@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
+    public function index()
+    {
+        $usuarios = Usuario::withCount('tickets')->get();
+        return view('users.index', compact('usuarios'));
+    }
     public function create()
     {
         return view('users.create');
@@ -25,6 +30,34 @@ class UsuarioController extends Controller
             'email' => $validatedData['email'],
         ]);
 
-        return redirect()->route('usuarios.create');
+        return redirect()->route('usuarios.index');
+    }
+    public function destroy($id)
+    {
+        $usuario = Usuario::findOrFail($id);
+
+        $usuario->delete();
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente.');
+    }
+
+    public function edit($id)
+    {
+        $usuario = Usuario::findOrFail($id);
+        return view('users.edit', compact('usuario'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuario = Usuario::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:usuarios,email,' . $usuario->id,
+        ]);
+
+        $usuario->update($validatedData);
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
     }
 }
